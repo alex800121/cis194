@@ -1,0 +1,21 @@
+import Data.List
+import Control.Monad
+import qualified Data.Set as S
+
+type Peg = String
+type Move = (Peg,Peg)
+
+hanoi :: Int -> Peg -> Peg -> Peg -> [Move]
+hanoi 0 _ _ _ = []
+hanoi n a b c = hanoi (n-1) a c b ++ (a,b) : hanoi (n-1) c b a
+
+hanoiPlus :: Int -> Peg -> Peg -> Peg -> Peg -> [Move]
+hanoiPlus 0 _ _ _ _ = []
+hanoiPlus 1 a b _ _ = [(a,b)]
+hanoiPlus 2 a b c d = hanoiPlus 1 a c b d ++ (a,b) : hanoiPlus 1 c d a b
+
+equally :: Int -> Peg -> Peg -> Peg -> Peg -> [Move]
+equally 0 _ _ _ _ = []
+equally 1 a _ c _ = [(a,c)]
+equally 2 a _ c d = [(a,d),(a,c)]
+equally 3 a b c d = equally (n-1) a c b d ++ (a,c) : equally 
